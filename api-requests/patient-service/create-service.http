@@ -1,0 +1,12 @@
+### POST request to create a patient
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "Dilrangi Sankalpana",
+  "email": "sankalpana00@gmail.com",
+  "address": "Meegahasewana, Unella, Palatuwa",
+  "dateOfBirth": "2000-05-18"
+}
+
+###
