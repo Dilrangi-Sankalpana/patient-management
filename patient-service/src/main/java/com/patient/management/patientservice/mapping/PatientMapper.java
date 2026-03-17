@@ -4,8 +4,6 @@ import com.patient.management.patientservice.dto.PatientRequestDTO;
 import com.patient.management.patientservice.dto.PatientResponseDTO;
 import com.patient.management.patientservice.model.Patient;
 
-import java.time.LocalDate;
-
 public class PatientMapper {
     public static PatientResponseDTO toPatientResponseDTO(Patient patient) {
         PatientResponseDTO patientResponseDTO = new PatientResponseDTO();
