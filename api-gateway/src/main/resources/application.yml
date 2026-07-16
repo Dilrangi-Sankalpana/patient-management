@@ -1,0 +1,33 @@
+server:
+  port: 4004
+
+#spring:
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          routes:
+#
+#            ## REST Client --> http://localhost:4004/api-gateway/patients
+#            ## API Gateway --> http://patient-service:4000/patients
+#            - id: patient-service-route
+#              uri: http://patient-service:4000
+#              predicates:
+#                - Path=/api-gateway/patients/**
+#              filters:
+#                - StripPrefix=1
+#
+#            ## REST Client --> http://localhost:4004/api-docs/patients
+#            ## API Gateway --> http://patient-service:4000/v3/api-docs
+#            - id: patient-service-api-docs-route
+#              uri: http://patient-service:4000
+#              predicates:
+#                - Path=/api-docs/patients
+#              filters:
+#                - RewritePath=/api-docs/patients,/v3/api-docs
+#
+#
+#            - id: patient-service-swagger-ui
+#              uri: http://patient-service:4000
+#              predicates:
+#                - Path=/swagger-ui.html
