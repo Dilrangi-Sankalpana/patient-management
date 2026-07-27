@@ -1,3 +1,6 @@
+// Defines What operations are available, What data goes in, What data comes out
+
+// Uses Protocol Buffers version 3 (Defines rules for serialization, proto3 is the modern standard)
 syntax = "proto3";
 
 option java_multiple_files = true;
@@ -7,12 +10,14 @@ service BillingService {
   rpc CreateBillingAccount (BillingRequest) returns (BillingResponse);
 }
 
+// Input data structure
 message BillingRequest {
   string patientId = 1;
   string name = 2;
   string email = 3;
 }
 
+// Output format of the remote method
 message BillingResponse {
   string accountId = 1;
   string status = 2;

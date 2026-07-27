@@ -1,9 +1,11 @@
 package com.patient.management.patientservice.grpc;
 
+// Generated classes from .proto file
 import billing.BillingRequest;
 import billing.BillingResponse;
 import billing.BillingServiceGrpc;
 
+import com.patient.management.patientservice.entity.Patient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class BillingServiceGrpcClient {
 
     private static final Logger log = LoggerFactory.getLogger(BillingServiceGrpcClient.class);
+
+    // Remote method caller
     private final BillingServiceGrpc.BillingServiceBlockingStub billingServiceBlockingStub;
 
     public BillingServiceGrpcClient(
@@ -25,14 +29,21 @@ public class BillingServiceGrpcClient {
     ) {
         log.info("{}:{}", serverAddress, serverPort);
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(serverAddress, serverPort).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress(serverAddress, serverPort)
+                .usePlaintext()
+                .build();
 
         billingServiceBlockingStub = BillingServiceGrpc.newBlockingStub(channel);
     }
 
-    public void createBillingRequest(String patientId, String name, String email) {
+    public void createBillingRequest(Patient patient) {
 
-        BillingRequest request = BillingRequest.newBuilder().setPatientId(patientId).setName(name).setEmail(email).build();
+        BillingRequest request = BillingRequest.newBuilder()
+                .setPatientId(patient.getId().toString())
+                .setName(patient.getName())
+                .setEmail(patient.getEmail())
+                .build();
 
         BillingResponse response = billingServiceBlockingStub.createBillingAccount(request);
 
