@@ -1,6 +1,6 @@
 package com.patient.management.patientservice.kafka;
 
-import com.patient.management.patientservice.model.Patient;
+import com.patient.management.patientservice.entity.Patient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

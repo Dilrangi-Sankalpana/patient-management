@@ -7,7 +7,7 @@ import com.patient.management.patientservice.exception.PatientNotFoundException;
 import com.patient.management.patientservice.grpc.BillingServiceGrpcClient;
 import com.patient.management.patientservice.kafka.KafkaProducer;
 import com.patient.management.patientservice.mapping.PatientMapper;
-import com.patient.management.patientservice.model.Patient;
+import com.patient.management.patientservice.entity.Patient;
 import com.patient.management.patientservice.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 

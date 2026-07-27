@@ -2,7 +2,7 @@ package com.patient.management.patientservice.mapping;
 
 import com.patient.management.patientservice.dto.PatientRequestDTO;
 import com.patient.management.patientservice.dto.PatientResponseDTO;
-import com.patient.management.patientservice.model.Patient;
+import com.patient.management.patientservice.entity.Patient;
 
 public class PatientMapper {
     public static PatientResponseDTO toPatientResponseDTO(Patient patient) {

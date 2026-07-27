@@ -1,6 +1,6 @@
 package com.patient.management.patientservice.repository;
 
-import com.patient.management.patientservice.model.Patient;
+import com.patient.management.patientservice.entity.Patient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
