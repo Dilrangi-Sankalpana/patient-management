@@ -1,5 +1,5 @@
 ### POST request to generate a token
-POST http://localhost:4005/login
+POST http://localhost:4004/api-gateway/auth/login
 Content-Type: application/json
 
 {
