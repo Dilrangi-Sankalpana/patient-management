@@ -23,6 +23,7 @@ spring:
                 - Path=/api-gateway/patient/**
               filters:
                 - StripPrefix=1
+                - JwtValidation
 
             ## REST Client --> http://localhost:4004/api-docs/patients
             ## API Gateway --> http://patient-service:4000/v3/api-docs
