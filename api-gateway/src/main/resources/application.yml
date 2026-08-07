@@ -22,8 +22,8 @@ spring:
               filters:
                 - RewritePath=/api-docs/auth,/v3/api-docs
 
-            ## REST Client --> http://localhost:4004/api-gateway/patients
-            ## API Gateway --> http://patient-service:4000/patients
+            ## REST Client --> http://localhost:4004/api-gateway/patient
+            ## API Gateway --> http://patient-service:4000/patient
             - id: patient-service-route
               uri: http://patient-service:4000
               predicates:
@@ -32,7 +32,7 @@ spring:
                 - StripPrefix=1
                 - JwtValidation
 
-            ## REST Client --> http://localhost:4004/api-docs/patients
+            ## REST Client --> http://localhost:4004/api-docs/patient
             ## API Gateway --> http://patient-service:4000/v3/api-docs
             - id: patient-service-api-docs-route
               uri: http://patient-service:4000
