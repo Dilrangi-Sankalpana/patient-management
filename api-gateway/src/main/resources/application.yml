@@ -15,6 +15,13 @@ spring:
               filters:
                 - StripPrefix=2
 
+            - id: auth-service-api-docs-route
+              uri: http://auth-service:4005
+              predicates:
+                - Path=/api-docs/auth
+              filters:
+                - RewritePath=/api-docs/auth,/v3/api-docs
+
             ## REST Client --> http://localhost:4004/api-gateway/patients
             ## API Gateway --> http://patient-service:4000/patients
             - id: patient-service-route
