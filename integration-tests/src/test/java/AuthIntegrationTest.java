@@ -32,6 +32,23 @@ public class AuthIntegrationTest {
                 .body("token", notNullValue())
                 .extract()
                 .response();
+    }
 
+    @Test
+    public void shouldReturnStatusCode401OnInvalidLogin() {
+        String loginPayload = """
+                   {
+                     "email": "invaliduser@test.com",
+                     "password": "wrong password"
+                   }\s
+                \s""";
+
+        given()
+                .contentType("application/json")
+                .body(loginPayload)
+                .when()
+                .post("/api-gateway/auth/login")
+                .then()
+                .statusCode(401);
     }
 }
