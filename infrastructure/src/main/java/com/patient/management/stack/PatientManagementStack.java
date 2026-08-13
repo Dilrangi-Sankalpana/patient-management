@@ -5,6 +5,9 @@ import software.amazon.awscdk.services.ec2.*;
 import software.amazon.awscdk.services.ec2.InstanceType;
 import software.amazon.awscdk.services.rds.*;
 import software.amazon.awscdk.services.route53.CfnHealthCheck;
+import software.amazon.awscdk.services.msk.CfnCluster;
+
+import java.util.stream.Collectors;
 
 public class PatientManagementStack extends Stack {
 
@@ -26,6 +29,8 @@ public class PatientManagementStack extends Stack {
 
         CfnHealthCheck patientDbHealthCheck =
                 createHealthCheck(patientServiceDb, "PatientServiceHealthCheck");
+
+        CfnCluster mskCluster = createCluster();
     }
 
     private Vpc createVpc() {
@@ -63,6 +68,20 @@ public class PatientManagementStack extends Stack {
                 .build();
     }
 
+    private CfnCluster createCluster() {
+        return CfnCluster.Builder.create(this, "MskCluster")
+                .clusterName("kafka-cluster")
+                .kafkaVersion("2.8.0")
+                .numberOfBrokerNodes(1)
+                .brokerNodeGroupInfo(CfnCluster.BrokerNodeGroupInfoProperty.builder()
+                        .instanceType("kafka.m5.xlarge")
+                        .clientSubnets(vpc.getPrivateSubnets().stream()
+                                .map(ISubnet::getSubnetId)
+                                .collect(Collectors.toList()))
+                        .brokerAzDistribution("DEFAULT")
+                        .build())
+                .build();
+    }
 
     public static void main(final String[] args) {
 
