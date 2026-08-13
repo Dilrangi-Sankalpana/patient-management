@@ -4,6 +4,7 @@ import software.amazon.awscdk.*;
 import software.amazon.awscdk.services.ec2.*;
 import software.amazon.awscdk.services.ec2.InstanceType;
 import software.amazon.awscdk.services.rds.*;
+import software.amazon.awscdk.services.route53.CfnHealthCheck;
 
 public class PatientManagementStack extends Stack {
 
@@ -19,6 +20,12 @@ public class PatientManagementStack extends Stack {
 
         DatabaseInstance patientServiceDb =
                 createDatabase("PatientServiceDB", "patient-service-db");
+
+        CfnHealthCheck authDbHealthCheck =
+                createHealthCheck(authServiceDb, "AuthServiceHealthCheck");
+
+        CfnHealthCheck patientDbHealthCheck =
+                createHealthCheck(patientServiceDb, "PatientServiceHealthCheck");
     }
 
     private Vpc createVpc() {
@@ -43,6 +50,19 @@ public class PatientManagementStack extends Stack {
                 .databaseName(dbName)
                 .build();
     }
+
+    private CfnHealthCheck createHealthCheck(DatabaseInstance db, String id) {
+        return CfnHealthCheck.Builder.create(this, id)
+                .healthCheckConfig(CfnHealthCheck.HealthCheckConfigProperty.builder()
+                        .type("TCP")
+                        .port(Token.asNumber(db.getDbInstanceEndpointPort()))
+                        .ipAddress(db.getDbInstanceEndpointAddress())
+                        .requestInterval(30)
+                        .failureThreshold(3)
+                        .build())
+                .build();
+    }
+
 
     public static void main(final String[] args) {
 
